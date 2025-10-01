@@ -104,7 +104,7 @@ router.post('/login', [
 });
 
 // GET /api/auth/me
-router.get('/me', auth, async (req, res) => {
+router.get('/me',async (req, res) => {
 try {
 res.json({
 user: {

@@ -54,9 +54,9 @@ mongoose.connect(MONGODB_URI)
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // API Routes
-app.use('/api/auth', require('./src/routes/auth.js'));
-app.use('/api/learning-path', require('./src/routes/learningPath.js'));
-app.use('/api/chat', require('./src/routes/chat.js'));
+app.use('/api/auth', require('./auth.js'));
+app.use('/api/learning-path', require('./learningPath.js'));
+app.use('/api/chat', require('./chat.js'));
 
 // Health check endpoint
 app.get('/healthz', (req, res) => {

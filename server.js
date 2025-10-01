@@ -44,6 +44,7 @@ app.use(cors({
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.static('.'));
 
 // Serve static files
 app.use(express.static('public'));
@@ -57,6 +58,9 @@ mongoose.connect(MONGODB_URI)
 app.use('/api/auth', require('./auth.js'));
 app.use('/api/learning-path', require('./learningPath.js'));
 app.use('/api/chat', require('./chat.js'));
+app.get('*', (req, res) => {
+res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Health check endpoint
 app.get('/healthz', (req, res) => {
@@ -92,7 +96,7 @@ io.on('connection', (socket) => {
 
 // Catch-all handler for SPA routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Error handling middleware

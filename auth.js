@@ -105,19 +105,19 @@ router.post('/login', [
 
 // GET /api/auth/me
 router.get('/me', auth, async (req, res) => {
-  try {
-    res.json({
-      user: {
-        id: req.user._id,
-        name: req.user.name,
-        email: req.user.email,
-        preferences: req.user.preferences
-      }
-    });
-  } catch (err) {
-    console.error('Get user error:', err);
-    res.status(500).json({ error: 'Server error' });
-  }
+try {
+res.json({
+user: {
+id: req.user._id,
+name: req.user.name,
+email: req.user.email,
+preferences: req.user.preferences
+}
+});
+} catch (err) {
+console.error('Get user error:', err);
+res.status(500).json({ error: 'Server error' });
+}
 });
 
 module.exports = router;

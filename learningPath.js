@@ -1,11 +1,11 @@
 const express = require('express');
-const auth = require('../middleware/auth');
+
 const User = require('./User');
 
 const router = express.Router();
 
 // Generate learning path
-router.post('/generate', auth, async (req, res) => {
+router.post('/generate', async (req, res) => {
   try {
     const { topic, difficulty = 'beginner', duration = 'medium' } = req.body;
 
@@ -41,7 +41,7 @@ router.post('/generate', auth, async (req, res) => {
 });
 
 // Get user's learning paths
-router.get('/my-paths', auth, async (req, res) => {
+router.get('/my-paths',  async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select('learningPaths');
     res.json({ learningPaths: user.learningPaths || [] });
